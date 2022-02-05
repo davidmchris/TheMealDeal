@@ -4,13 +4,19 @@ const logger = require('morgan');
 const app = express();
 app.use(logger('dev'));
 
-app.use('/', (req, res) => {
-    res.status(200).send("hello world");
+app.use('/api', (req, res) => {
+    res.status(200).send("version 1.0.0");
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port);
+//gets static files from the public directory
+app.use(express.static('public', {
+    extensions: ['html', 'htm']
+}));
 
+
+const PORT = process.env.PORT ||8080;
+const HOST = 'localhost'; //so it works on chrome
+app.listen(PORT, HOST, () => console.log(`Listening on port ${PORT}...`));
 // const http = require('http');
 
 // const hostname = 'localhost';
