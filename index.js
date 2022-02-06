@@ -1,20 +1,18 @@
 const express = require('express');
 const logger = require('morgan');
+const routes = require('./routes/routes');
 
 const app = express();
 app.use(logger('dev'));
 
-app.use('/api', (req, res) => {
-    res.status(200).send("version 1.0.0");
-});
+app.use('/api', routes);
 
 //gets static files from the public directory
 app.use(express.static('public', {
     extensions: ['html', 'htm']
 }));
 
-
-const PORT = process.env.PORT ||8080;
+const PORT = process.env.PORT || 3000;
 const HOST = 'localhost'; //so it works on chrome
 app.listen(PORT, HOST, () => console.log(`Listening on port ${PORT}...`));
 // const http = require('http');
